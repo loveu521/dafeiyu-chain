@@ -19,13 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-注意：本仓库的编排代码采用 MIT，但运行时依赖的上游项目各有其许可：
-  AstrBot            AGPL-3.0
-  edge-tts           GPL-3.0
-  bilibili-api-python GPL-3.0
-  Playwright         Apache-2.0
-本仓库不包含这些项目的源码。若你基于本仓库做二次分发，请自行确认
-AGPL/GPL 的合规义务，并在你的项目中保留上游版权与许可声明。
