@@ -1,0 +1,6 @@
+# 与仓库根 requirements.txt 一致（AstrBot 会按插件目录下的 requirements.txt 安装依赖）
+edge-tts>=7.0.0
+bilibili-api-python>=17.0.0
+playwright>=1.48.0
+aiohttp>=3.10.0
+PyYAML>=6.0

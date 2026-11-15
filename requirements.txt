@@ -1,0 +1,11 @@
+# 核心开源依赖（本地跑通 + 服务器阶段共用）
+edge-tts>=7.0.0              # 语音合成，免 API Key
+bilibili-api-python>=17.0.0  # B 站 400+ 接口（只读取数 / 可选发评论）
+playwright>=1.48.0           # HTML/网页截图 → 图片消息
+aiohttp>=3.10.0              # 异步 HTTP（AstrBot 官方建议不用 requests）
+PyYAML>=6.0                  # 配置
+pydub>=0.25.1                # mp3 → 16k 单声道 wav（AstrBot Comp.Record 只吃 wav）
+# 系统依赖：ffmpeg（pydub 解码 mp3 需要）
+# 服务器阶段由 AstrBot 本体提供：astrbot / qq_official 适配器
+# 浏览器：playwright install --with-deps chromium
+#   或系统已装 chromium 时设置 DFY_CHROMIUM=/usr/bin/chromium

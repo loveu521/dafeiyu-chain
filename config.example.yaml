@@ -1,0 +1,23 @@
+# 示例配置：复制为 config.yaml 后按需改（两份都提交仓库，config.yaml 是默认可用值）
+gateway: mock
+outdir: output
+
+# 自然语言理解（阶段二修复：不带 / 也能触发，且不让 LLM 回「刷不了」）
+nlu:
+  enabled: true         # 意图路由：「刷b站」「刷视频」「来段语音」直接跑真实能力
+  inject_persona: true  # 给 LLM 注入大肥鱼人设，避免它否认自己会刷 B 站
+
+capabilities: [chat, voice, screenshot, bilibili, digest, comment]
+
+skills:
+  chat:       {enabled: true}
+  voice:      {enabled: true, voice_id: zh-CN-XiaoyiNeural, rate: "-8%"}
+  screenshot: {enabled: true, mode: html_card, url: "", url_allowlist: []}
+  bilibili:   {enabled: true, source: auto, limit: 3, dedup: true}
+  digest:     {enabled: true, hot_limit: 3, use_llm: true, llm_timeout: 20}
+  comment:
+    enabled: true
+    dry_run: true
+    allow_publish: false
+    daily_limit: 3
+    credential: {}

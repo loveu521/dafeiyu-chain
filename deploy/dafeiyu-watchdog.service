@@ -1,0 +1,7 @@
+[Unit]
+Description=大肥鱼看门狗（WebUI 不响应则重启 AstrBot）
+
+[Service]
+Type=oneshot
+Environment=ASTRBOT_PORT=6185
+ExecStart=/opt/dafeiyu/deploy/healthcheck.sh

@@ -1,0 +1,53 @@
+# 可复制 / 可选链路配置：每个能力独立开关，关掉任意一个不影响其他环节。
+# 复制本文件为 config.yaml 后按需改；服务器阶段只改 gateway 与 credential。
+
+gateway: mock          # mock = 本地跑通（无需QQ账号） | astrbot = 服务器真实对接
+outdir: output
+
+# 自然语言理解（阶段二修复：不带 / 也能触发，且不让 LLM 回「刷不了」）
+nlu:
+  enabled: true         # 意图路由：「刷b站」「刷视频」「来段语音」直接跑真实能力
+  inject_persona: true  # 给 LLM 注入大肥鱼人设，避免它否认自己会刷 B 站
+
+# 能力自检顺序（也就是「养鱼 → 语音 → 图片 → B站 → 读片 → 评论」的叠加顺序）
+capabilities:
+  - chat
+  - voice
+  - screenshot
+  - bilibili
+  - digest
+  - comment
+
+skills:
+  chat:
+    enabled: true
+
+  voice:
+    enabled: true
+    voice_id: zh-CN-XiaoyiNeural
+    rate: "-8%"
+
+  screenshot:
+    enabled: true
+    mode: html_card        # html_card = HTML渲染截图 | url = 网页截图
+    url: ""
+    url_allowlist: []      # url 模式必须显式填白名单域名
+
+  bilibili:
+    enabled: true
+    source: auto           # auto=轮换现刷（热门翻页/排行榜/关键词搜索）| popular | ranking
+    limit: 3
+    dedup: true            # 跳过最近发过的视频，「再刷刷其他的」才真的换一批
+
+  digest:
+    enabled: true          # 读片总结：读标题/简介/热门评论并总结输出
+    hot_limit: 3           # 取几条热门评论（按点赞数降序）
+    use_llm: true          # 有 LLM 时优先让模型归纳；没配/超时/报错自动降级本地摘要
+    llm_timeout: 20        # LLM 总结超时秒数，超时立即降级，不卡住鱼
+
+  comment:
+    enabled: true
+    dry_run: true          # 默认只出草稿，不真发
+    allow_publish: false   # 真发需显式置 true + 填 credential
+    daily_limit: 3
+    credential: {}         # sessdata / bili_jct / buvid3 / dedeuserid

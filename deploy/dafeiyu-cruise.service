@@ -1,0 +1,12 @@
+[Unit]
+Description=大肥鱼每日巡游（可插拔链路实跑 + 产物归档）
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/dafeiyu/app
+Environment=TZ=Asia/Shanghai
+ExecStart=/opt/dafeiyu/venv/bin/python run_local.py
+StandardOutput=append:/opt/dafeiyu/logs/cruise.log
+StandardError=append:/opt/dafeiyu/logs/cruise.log

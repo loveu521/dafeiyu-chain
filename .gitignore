@@ -1,0 +1,13 @@
+# 本地产物与凭证
+output/
+*.mp3
+*.wav
+__pycache__/
+*.pyc
+.venv/
+config.local.yaml
+.env
+
+# credential 绝不入库：B站 SESSDATA / QQ AppSecret
+*credential*
+!config.example.yaml

@@ -1,0 +1,10 @@
+name: astrbot_plugin_dafeiyu
+display_name: 蓝色大肥鱼 · 可插拔链路
+desc: 养一条会说话、会发语音、会发截图、会刷B站、会读简介/热评并总结、会攒评论草稿的电子大肥鱼。各段能力独立开关，可复制可选链路。
+short_desc: 大肥鱼：语音/截图/B站现刷/读片总结，能力全可插拔
+version: 0.4.0
+author: dafeiyu-chain
+repo: https://github.com/loveu521/dafeiyu-chain
+support_platforms:
+  - qq_official
+astrbot_version: ">=4.19.6"

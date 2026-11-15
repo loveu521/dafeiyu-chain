@@ -1,0 +1,12 @@
+[Unit]
+Description=大肥鱼每日巡游定时器（09:00 / 20:00）
+
+[Timer]
+OnCalendar=*-*-* 09:00:00
+OnCalendar=*-*-* 20:00:00
+Persistent=true
+RandomizedDelaySec=120
+Unit=dafeiyu-cruise.service
+
+[Install]
+WantedBy=timers.target

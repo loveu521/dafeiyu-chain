@@ -1,0 +1,50 @@
+{
+  "voice_id": {
+    "description": "edge-tts 音色",
+    "type": "string",
+    "default": "zh-CN-XiaoyiNeural",
+    "hint": "中文音色可选 zh-CN-YunxiNeural / zh-CN-XiaoxiaoNeural 等"
+  },
+  "bili_source": {
+    "description": "B 站取数来源",
+    "type": "string",
+    "default": "popular",
+    "options": ["popular", "ranking"],
+    "hint": "只读接口，无需登录凭证"
+  },
+  "bili_limit": {
+    "description": "每次巡游取几条视频",
+    "type": "int",
+    "default": 3
+  },
+  "comment_dry_run": {
+    "description": "评论只出草稿不真发（强烈建议保持开启）",
+    "type": "bool",
+    "default": true,
+    "hint": "真发会受 B 站平台规则约束，且需要登录凭证。默认绝不真发。"
+  },
+  "comment_daily_limit": {
+    "description": "每日评论上限",
+    "type": "int",
+    "default": 3
+  },
+  "screenshot_mode": {
+    "description": "图片来源方式",
+    "type": "string",
+    "default": "html_card",
+    "options": ["html_card", "url"],
+    "hint": "html_card = 把巡游数据渲染成 HTML 再截图；url = 截指定网页（需配白名单）"
+  },
+  "digest_use_llm": {
+    "description": "读片总结是否优先用 LLM 归纳",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭则用本地抽取式摘要（不烧 token）；LLM 超时/未配置/报错都会自动降级，鱼不会哑掉"
+  },
+  "digest_hot_limit": {
+    "description": "读片时取几条热门评论",
+    "type": "int",
+    "default": 3,
+    "hint": "按点赞数降序读取，仅只读公开接口"
+  }
+}

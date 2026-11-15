@@ -1,0 +1,10 @@
+[Unit]
+Description=大肥鱼看门狗定时器（每 5 分钟）
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+Unit=dafeiyu-watchdog.service
+
+[Install]
+WantedBy=timers.target

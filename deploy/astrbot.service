@@ -1,0 +1,23 @@
+[Unit]
+Description=AstrBot 4.x - 蓝色大肥鱼 QQ 官方机器人 (WebSocket)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/dafeiyu/astrbot_data
+Environment=TZ=Asia/Shanghai
+Environment=PYTHONPATH=/opt/dafeiyu/app
+Environment=PLAYWRIGHT_BROWSERS_PATH=/root/.cache/ms-playwright
+Environment=PYTHONWARNINGS=ignore::SyntaxWarning
+# AstrBot 要求 Python>=3.12；链路本体跑在 /opt/dafeiyu/venv (3.11)，互不干扰
+ExecStart=/opt/dafeiyu/astrbot_venv/bin/astrbot run -p 6185
+Restart=always
+RestartSec=15
+# 内存小机器的保护：限制单进程上限，避免拖垮宝塔面板
+MemoryMax=900M
+StandardOutput=append:/opt/dafeiyu/logs/astrbot.log
+StandardError=append:/opt/dafeiyu/logs/astrbot.log
+
+[Install]
+WantedBy=multi-user.target
