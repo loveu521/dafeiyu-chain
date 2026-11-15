@@ -10,6 +10,9 @@ Environment=TZ=Asia/Shanghai
 Environment=PYTHONPATH=/opt/dafeiyu/app
 Environment=PLAYWRIGHT_BROWSERS_PATH=/root/.cache/ms-playwright
 Environment=PYTHONWARNINGS=ignore::SyntaxWarning
+# 可选：B站登录凭证从本地文件加载（chmod 600，已被 gitignore）。
+# 前面的 "-" 表示文件不存在也不报错；默认 dry_run 时根本用不到它。
+EnvironmentFile=-/opt/dafeiyu/secrets/bili.env
 # AstrBot 要求 Python>=3.12；链路本体跑在 /opt/dafeiyu/venv (3.11)，互不干扰
 ExecStart=/opt/dafeiyu/astrbot_venv/bin/astrbot run -p 6185
 Restart=always

@@ -1,13 +1,31 @@
-# 本地产物与凭证
+# 本地产物（真实截图/语音/收件箱/报告，绝不入库）
 output/
 *.mp3
 *.wav
+*.png
+*.log
 __pycache__/
 *.pyc
 .venv/
-config.local.yaml
-.env
 
-# credential 绝不入库：B站 SESSDATA / QQ AppSecret
+# ---- 本机私有配置与凭据：绝不入库 ----
+# 规则：config.yaml / config.example.yaml 只允许布尔开关与非敏感参数，
+#       任何真实值一律走环境变量或下面这些被忽略的本地文件。
+config.local.yaml
+config.*.local.yaml
+.env
+.env.*
+*.env
+!*.env.example
+secrets/
 *credential*
+credentials*.json
+*.token
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+cmd_config.json          # AstrBot 运行配置，含 AppID/AppSecret/LLM Key
+astrbot_data/            # AstrBot 整个数据目录（DB、插件、配置）
 !config.example.yaml

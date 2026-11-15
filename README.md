@@ -5,6 +5,10 @@
 评论默认**只出草稿、绝不真发**。
 
 > 仓库：[github.com/loveu521/dafeiyu-chain](https://github.com/loveu521/dafeiyu-chain) · MIT License
+>
+> **给 AI / 自动化工具读**：[AGENTS.md](AGENTS.md)（机器可读部署规范）；
+> [DEPLOY_PROMPT.md](DEPLOY_PROMPT.md)（可直接复制给另一个 AI 的部署提示词）。
+> 提交前务必 `bash deploy/check-secrets.sh`。
 
 | 阶段 | 目标 | 状态 |
 |---|---|---|
@@ -272,6 +276,10 @@ WebUI 默认 `6185`（已放行 ufw）。WebSocket 是**出站**连接，不需�
   `ssh -L 6185:127.0.0.1:6185 root@<服务器IP>` 访问。
 - 评论保持 `dry_run: true`。自动留言受平台规则约束，别拿去批量刷。
 - 不要把 LLM API Key、QQ AppSecret、B 站登录凭证写进仓库或长期记忆。
+- **凭据注入规则**：`config.yaml` 里 `credential` 永远留空 `{}`，真实值只走环境变量
+  （`BILI_SESSDATA` 等）或本地 `secrets/bili.env`；QQ 官机凭证与 LLM Key 由
+  AstrBot WebUI 管理，落在已被 gitignore 的 `cmd_config.json`。
+  提交/推送前跑 `bash deploy/check-secrets.sh`，退出码必须为 0。详见 [AGENTS.md §7](AGENTS.md)。
 
 ---
 
@@ -312,9 +320,24 @@ skills:
 > 本项目仅用于个人学习与自建机器人。使用 QQ 官方机器人、B 站接口时请遵守对应平台规则；
 > 账号风控、LLM token 账单、凭证安全由使用者自行负责。
 
+## 让其他 AI 接手部署
+
+仓库里有两份**专门写给 AI 看**的纯文本文档：
+
+| 文件 | 用途 |
+|---|---|
+| [AGENTS.md](AGENTS.md) | 机器可读部署规范：30 秒速览 YAML、意图与边界、6 段能力链路、目录地图、部署决策树、精确命令与验证点、验收标准、**凭据红线**、14 条踩坑速查、扩展步骤 |
+| [DEPLOY_PROMPT.md](DEPLOY_PROMPT.md) | 一整段可直接复制粘贴给另一个 AI 的部署提示词，内含「只问机器信息、绝不索要密钥」「提交前跑扫描」「列出需要人类扫码/改密码的步骤」等约束 |
+
+配套的 `deploy/check-secrets.sh` 会扫描所有将入库文件，命中 token / 密码 / API Key /
+登录凭证 / 硬编码公网 IP 时以退出码 1 阻断，且只打印脱敏前缀。两份文档本身零凭据，
+可安全公开。
+
 ## 目录
 
 ```
+AGENTS.md / DEPLOY_PROMPT.md      给 AI 读的部署规范与提示词
+deploy/check-secrets.sh           提交前敏感信息扫描
 config.yaml / config.example.yaml   可插拔开关
 core/           models 消息段 / persona 人设 / gateway 网关 / chain 编排
 skills/         chat voice screenshot bilibili digest comment 六个独立能力

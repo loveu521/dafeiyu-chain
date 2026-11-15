@@ -17,7 +17,17 @@ skills:
   digest:     {enabled: true, hot_limit: 3, use_llm: true, llm_timeout: 20}
   comment:
     enabled: true
-    dry_run: true
-    allow_publish: false
+    dry_run: true          # 默认只出草稿，绝不真发
+    allow_publish: false   # 不要改成 true，除非你明确知道在做什么
     daily_limit: 3
-    credential: {}
+    credential: {}         # 永远保持空！真实凭证只从环境变量注入：
+                           #   BILI_SESSDATA / BILI_JCT / BILI_BUVID3 / BILI_DEDEUSERID
+                           # 或 systemd EnvironmentFile 指向被 gitignore 的本地文件
+                           # （见 AGENTS.md §7）。绝不把值写进本文件。
+
+# ---------------------------------------------------------------------------
+# 凭据红线（给人和 AI 都适用）
+#   QQ AppID/AppSecret 与 LLM API Key 由 AstrBot WebUI 管理，落在
+#   astrbot_data/data/cmd_config.json（已 gitignore），不写进本仓库。
+#   提交前请跑： bash deploy/check-secrets.sh   （退出码必须为 0）
+# ---------------------------------------------------------------------------

@@ -7,6 +7,8 @@ Wants=network-online.target
 Type=oneshot
 WorkingDirectory=/opt/dafeiyu/app
 Environment=TZ=Asia/Shanghai
+# 可选：仅在显式允许真发评论时才需要；本地文件已被 gitignore
+EnvironmentFile=-/opt/dafeiyu/secrets/bili.env
 ExecStart=/opt/dafeiyu/venv/bin/python run_local.py
 StandardOutput=append:/opt/dafeiyu/logs/cruise.log
 StandardError=append:/opt/dafeiyu/logs/cruise.log
